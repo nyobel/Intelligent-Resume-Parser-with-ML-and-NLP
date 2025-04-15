@@ -92,7 +92,7 @@ def normalize_text(text):
 
 # Test with a sample resume
 if __name__ == "__main__":
-    sample_path = "./extracted_texts/resume_1_pdf.txt"
+    sample_path = "./extracted_texts/resume_temp_2.txt"
     if os.path.exists(sample_path):
         with open(sample_path, "r", encoding="utf-8") as f:
             raw = f.read()
