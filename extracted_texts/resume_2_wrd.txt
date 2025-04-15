@@ -1,0 +1,6 @@
+Brian Otieno
+Email: brian.o@example.com
+Phone: +254700000002
+Education: BSc Information Technology, JKUAT
+Experience: IT Support at Equity Bank (1 year)
+Skills: Networking, Linux, Python, MySQL

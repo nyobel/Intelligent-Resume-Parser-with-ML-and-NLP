@@ -1,0 +1,11 @@
+Alice Johnson
+
+nail: alice. j@example.com
+
+Phone: +254700000003,
+
+Education: nso computer Soience, University of Nairobi
+
+Experience: Softvare Engineer at Safaricon (2 years)
+
+Skills: Python, Javaseript, React, sot

@@ -1,0 +1,6 @@
+Alice Johnson
+Email: alice.j@example.com
+Phone: +254700000001
+Education: BSc Computer Science, University of Nairobi
+Experience: Software Engineer at Safaricom (2 years)
+Skills: Python, JavaScript, React, SQL
