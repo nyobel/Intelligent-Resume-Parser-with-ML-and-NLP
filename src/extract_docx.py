@@ -32,7 +32,7 @@ def extract_text_from_docx(filepath: str) -> str:
 
     return text.strip() #return clean, plain text
 
-#test block to preview output from a sample file
+# Test the function
 if __name__ == "__main__":
     test_path = "./data/sample_resumes/resume_temp.docx" 
     if os.path.exists(test_path):

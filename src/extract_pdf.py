@@ -17,7 +17,7 @@ def extract_text_from_pdf(filepath: str) -> str:
         print(f"[ERROR] Failed to read {filepath}: {e}")
     return text.strip()
 
-# For quick testing (optional)
+# Test the function
 if __name__ == "__main__":
     test_path = "./data/sample_resumes/resume_1.pdf"  # Adjust path as needed
     if os.path.exists(test_path):

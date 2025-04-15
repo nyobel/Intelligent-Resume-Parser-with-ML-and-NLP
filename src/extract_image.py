@@ -8,7 +8,7 @@ import cv2
 import pytesseract
 from PIL import Image
 
-# Specify the path to the tesseract executable if not in PATH
+# Specify the path to the tesseract executable
 pytesseract.pytesseract.tesseract_cmd = r"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
 
 def extract_text_from_image(filepath: str) -> str:

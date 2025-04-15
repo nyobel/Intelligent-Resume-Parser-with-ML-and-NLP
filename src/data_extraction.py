@@ -1,4 +1,3 @@
-# phase_1_data_extraction.py
 """
 Phase 1: Resume Data Extraction
 Objective: Extract raw text from various resume formats (PDF, DOCX, PNG) into plain text files for further processing.
@@ -7,7 +6,7 @@ Objective: Extract raw text from various resume formats (PDF, DOCX, PNG) into pl
 import os
 from typing import Union
 
-# Import extractors (to be implemented in separate modules)
+# Import extractors
 from extract_pdf import extract_text_from_pdf
 from extract_docx import extract_text_from_docx
 from extract_image import extract_text_from_image
