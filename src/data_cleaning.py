@@ -43,6 +43,8 @@ def clean_text(text):
     text = re.sub(r'\s*-\s*', '- ', text)  # clean dashes
     text = re.sub(r'\n+', ' ', text)  # flatten newlines
     text = re.sub(r'\s{2,}', ' ', text)  # collapse multiple spaces
+    text = re.sub(r"(?i)name\s*:\s*", "Name: ", text)
+
 
     def fix_dates(match):
         try:

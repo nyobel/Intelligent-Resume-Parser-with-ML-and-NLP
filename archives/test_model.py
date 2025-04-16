@@ -1,4 +1,3 @@
-# phase_3_test_model_on_resume.py
 """
 Test your trained custom NER model on real extracted resume text.
 Make sure you've already trained and saved the model in ./custom_ner_model

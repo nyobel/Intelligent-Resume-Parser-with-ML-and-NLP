@@ -9,9 +9,9 @@ import spacy
 import os
 
 # Path to the original trained model
-base_model_path = "./custom_ner_model"
+base_model_path = "./custom_ner_model_with_rules"
 # Path to the enhanced model that will include rule-based logic
-updated_model_path = "./custom_ner_model_with_rules"
+updated_model_path = "./custom_ner_model_with_rules_v2"
 # Path to the pattern rules
 patterns_path = "./src/entity_patterns.jsonl"
 
@@ -21,7 +21,11 @@ nlp = spacy.load(base_model_path)
 
 # Add the EntityRuler by name (registered component)
 print("Adding entity_ruler to pipeline before 'ner'")
-nlp.add_pipe("entity_ruler", before="ner")
+if "entity_ruler" not in nlp.pipe_names:
+    nlp.add_pipe("entity_ruler", before="ner")
+
+ruler = nlp.get_pipe("entity_ruler")
+
 
 # Load the actual patterns into the ruler
 print("Loading patterns from:", patterns_path)
