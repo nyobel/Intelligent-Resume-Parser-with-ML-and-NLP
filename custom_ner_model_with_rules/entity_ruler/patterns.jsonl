@@ -1,0 +1,6 @@
+{"label":"EMAIL","pattern":[{"TEXT":{"REGEX":"^[\\w.+-]+@[\\w-]+\\.[\\w.-]+$"}}]}
+{"label":"PHONE","pattern":[{"TEXT":{"REGEX":"^(\\+254|0)?7\\d{8}$"}}]}
+{"label":"EDUCATION","pattern":[{"LOWER":"bachelor"},{"LOWER":"of"},{"IS_ALPHA":true,"OP":"+"},{"LOWER":"in"},{"IS_ALPHA":true,"OP":"+"}]}
+{"label":"EDUCATION","pattern":[{"LOWER":"diploma"},{"LOWER":"in"},{"IS_ALPHA":true,"OP":"+"}]}
+{"label":"EDUCATION","pattern":[{"LOWER":"university"},{"IS_TITLE":true,"OP":"+"}]}
+{"label":"NAME","pattern":[{"LOWER":{"IN":["name","candidate"]}},{"IS_PUNCT":true,"OP":"?"},{"IS_TITLE":true},{"IS_TITLE":true}]}
