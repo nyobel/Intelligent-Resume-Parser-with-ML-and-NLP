@@ -1,4 +1,3 @@
-# test_model_with_rules.py
 """
 Test the upgraded spaCy model with rule-based EntityRuler.
 This version loads the saved model from custom_ner_model_with_rules
@@ -9,7 +8,7 @@ import spacy
 import os
 
 model_path = "./custom_ner_model_with_rules"
-sample_path = "./extracted_texts/resume_2_pdf.txt"  # Change if needed
+sample_path = "./extracted_texts/resume_2_pdf.txt"
 
 # Load the model with rules
 if not os.path.exists(model_path):

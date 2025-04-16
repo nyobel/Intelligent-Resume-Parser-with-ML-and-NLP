@@ -1,4 +1,3 @@
-# batch_resume_test_with_rules.py
 """
 Batch test using the rule-enhanced spaCy model across all resume text files.
 Loads model from custom_ner_model_with_rules and scans ./extracted_texts

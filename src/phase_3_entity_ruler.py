@@ -1,4 +1,3 @@
-# add_entity_ruler.py
 """
 This script adds rule-based entity patterns to your trained spaCy model.
 It uses a JSONL file of patterns and injects them using EntityRuler.

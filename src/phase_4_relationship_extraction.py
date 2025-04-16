@@ -1,4 +1,3 @@
-# relationship_extraction.py
 """
 Phase 4: Relationship Extraction
 

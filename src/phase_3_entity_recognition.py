@@ -15,7 +15,7 @@ import random
 import os
 
 # Load your annotated training data
-from training_data import TRAINING_DATA
+from phase_3_training_data import TRAINING_DATA
 
 # Create a blank English model
 nlp = spacy.blank("en")
