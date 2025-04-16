@@ -6,10 +6,6 @@ This script cleans the raw extracted resume text by:
 2. Fixing formatting inconsistencies
 3. Normalizing text through tokenization and lemmatization
 
-Required installations:
-    pip install nltk spacy python-dateutil
-    python -m nltk.downloader punkt stopwords wordnet
-    python -m spacy download en_core_web_sm
 """
 
 import os
@@ -40,12 +36,14 @@ def clean_text(text):
     - Fix excessive line breaks and spacing
     - Normalize date formats (e.g., April 2025 → 2025-04)
     """
-    text = re.sub(r'[\r\f\x0c]', ' ', text)
-    text = re.sub(r'[\*\|\=\_\~]+', ' ', text)
-    text = re.sub(r'\n{2,}', '\n', text)
-    text = re.sub(r'\s{2,}', ' ', text)
+    text = re.sub(r'[\r\f\x0c]', ' ', text)  # remove control chars
+    text = re.sub(r'[\*\|\=\_\~]+', ' ', text)  # strip line noise
+    text = re.sub(r'[•●▪️]', ' ', text)  # bullet symbols
+    text = re.sub(r'\s*:\s*', ': ', text)  # clean colons
+    text = re.sub(r'\s*-\s*', '- ', text)  # clean dashes
+    text = re.sub(r'\n+', ' ', text)  # flatten newlines
+    text = re.sub(r'\s{2,}', ' ', text)  # collapse multiple spaces
 
-    # Convert month-year formats into a consistent YYYY-MM format
     def fix_dates(match):
         try:
             return dateparser.parse(match.group(0)).strftime('%Y-%m')
@@ -66,20 +64,16 @@ def normalize_text(text):
     - Lemmatizing each word to its base form
     - Preserving important entities like emails
     """
-    # Extract full email addresses before tokenization to preserve them
     emails = re.findall(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", text)
 
-     # Replace each email in the text with a unique placeholder (EMAILPLACEHOLDER0, etc.)
     for i, email in enumerate(emails):
-        text = text.replace(email, f"EMAILPLACEHOLDER{i}") # remove email before tokenization
+        text = text.replace(email, f"EMAILPLACEHOLDER{i}")
 
     try:
-        # Tokenize and normalize (remove stopwords, lemmatize)
         tokens = word_tokenize(text)
         filtered = [lemmatizer.lemmatize(word.lower()) for word in tokens
                     if word.lower() not in stop_words and not re.fullmatch(r'[^a-zA-Z0-9]+', word)]
 
-        # Convert back to string and restore email placeholders
         result = ' '.join(filtered)
         for i, email in enumerate(emails):
             result = result.replace(f"emailplaceholder{i}", email)
@@ -90,7 +84,6 @@ def normalize_text(text):
         print("[ERROR] Normalization failed:", e)
         return ""
 
-# Test with a sample resume
 if __name__ == "__main__":
     sample_path = "./extracted_texts/resume_temp_2.txt"
     if os.path.exists(sample_path):
