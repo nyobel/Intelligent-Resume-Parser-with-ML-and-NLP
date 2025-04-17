@@ -72,7 +72,7 @@ Despite the hybrid approach, the NER output still suffers from **misclassificati
 - `DETAILS` → labeled as `DESIGNATION`
 - `Bank`, `Melaka` → labeled as `SKILLS`, though they are locations or organizations
 
-### 💡 What We've Done:
+### 💡 What's Been Done:
 - Built ML model on labeled training examples
 - Added refined rule patterns for emails, phones, designations, and skills
 - Applied filtering in relationship logic (e.g. ignore misfired `NAME`s)
