@@ -1,1 +1,13 @@
 src/__pycache__/
+# Ignore model folders
+output/
+
+# Ignore binary training data
+*.spacy
+
+# Ignore large model subfolders
+**/model
+**/vectors
+**/cfg
+
+archives/
