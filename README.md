@@ -1,63 +1,68 @@
 # Resume Parser with ML and NLP
 
-## 🔍 Project Overview
+## Project Overview
 This project is a resume parsing system that extracts structured information from resumes using a combination of **Machine Learning** and **Rule-Based Named Entity Recognition (NER)**. The goal is to transform unstructured resumes in PDF, DOCX, and image formats into structured data for downstream applications like applicant screening, skill matching, and job recommendation systems.
 
 ---
 
-## 🧱 Project Structure
+##  Project Structure
 
 ```
-resume-parser-with-ml-and-nlp/
+INTELLIGENT RESUME PARSER WITH ML AND NLP/
 │
-├── archives/                          # Archived models and unused test files
+├── archives/                          # Archived experiments and backup models
+├── data/                              # Source resume files
+├── extracted_texts/                   # Cleaned text files extracted from resumes
+├── output/                            # Trained model and artifacts
 │
-├── custom_ner_model_with_rules/      # Final working model (ML + rule patterns)
+├── src/                               # Project logic (all Python scripts)
+│   ├── __pycache__/
+│   ├── entity_patterns.jsonl          # Optional pattern file (unused in training)
+│   ├── extract_docx.py                # DOCX extractor
+│   ├── extract_image.py               # OCR for image resumes
+│   ├── extract_pdf.py                 # PDF extractor
+│   ├── labels.py                      # Custom entity label definitions
+│   ├── phase_1_run_extraction.py      # Extracts raw text from resumes
+│   ├── phase_2_data_cleaning.py       # Text normalization and cleanup
+│   ├── phase_3_data_conversion.py     # Converts training data to spaCy DocBin
+│   ├── phase_3_training_data.py       # Annotated training examples
+│   ├── phase_4_ground_truth.json      # Ground truth triples for evaluation
+│   ├── phase_4_relationship_extraction.py # Extracts rule-based and dependency-based relations
+│   ├── test_model.py                  # Manual testing script for NER outputs
 │
-├── data/                              # Source resumes
-├── extracted_texts/                   # Text extracted from resumes
-│
-├── src/                               # All Python scripts
-│   ├── run_extraction.py              # Main script to extract text from resumes
-│   ├── extract_pdf.py                 # Extracts text from PDF files
-│   ├── extract_docx.py                # Extracts text from DOCX files
-│   ├── extract_image.py               # OCR for PNG/JPG resumes
-│   ├── data_cleaning.py               # Normalization, noise removal
-│   ├── entity_recognition.py          # Trains the custom spaCy NER model
-│   ├── entity_ruler.py                # Adds JSONL rule patterns to the model
-│   ├── entity_patterns.jsonl          # All defined entity rules (EMAIL, NAME, SKILLS, etc.)
-│   ├── training_data.py               # ML training data examples
-│   ├── labels.py                      # Label definitions
-│   ├── test_model_with_rules.py       # Tests model on a single resume
-│   ├── batch_resume_test_with_rules.py# Batch NER testing across all resumes
-│   ├── relationship_extraction.py     # Extracts relationships between entities
-│
-├── README.md                          # You are here
+├── config.cfg                         # spaCy config for model training
+├── dev.spacy                          # Dev dataset in binary format
+├── train.spacy                        # Training dataset in binary format
 ├── requirements.txt                   # Required Python libraries
-└── .gitignore                         # Files/folders to ignore in git
+├── .gitignore                         # Files/folders to ignore in git
+├── README.md                          # You are here
 ```
 
 ---
 
-## 🧠 Phases
+## Phases
 
 ### Phase 1: Data Extraction ✅
-- Extract raw text from PDF, DOCX, and PNG resumes
-- Saved to `/extracted_texts/`
+- Automatically identifies file type (PDF, DOCX, PNG/JPG)
+- Extracts raw text using PyMuPDF, python-docx, or Tesseract OCR
+- Saves output to `/extracted_texts/`
 
 ### Phase 2: Data Cleaning ✅
-- Normalize text, remove noise, lemmatize
-- Preserve critical structures like names, emails, phone numbers
+- Removes noise, lowercases, and lemmatizes
+- Standardizes formatting for emails, phones, and spacing
 
 ### Phase 3: Entity Recognition (NER) ✅
-- Custom NER model trained on labeled data
-- Enhanced with `EntityRuler` rule-based patterns for key fields:
-  - `EMAIL`, `PHONE`, `EDUCATION`, `DESIGNATION`, `SKILLS`
+- Trained a custom NER model using **spaCy** and labeled training data
+- No `EntityRuler` was used
+- Labels include: `NAME`, `EMAIL`, `PHONE`, `EDUCATION`, `DESIGNATION`, `SKILLS`, `EXPERIENCE`, `PROJECT`
 
 ### Phase 4: Relationship Extraction ✅
-- Identify structured relationships such as:
+- Uses both rule-based and dependency-based methods
+- Extracts triplets such as:
   - `NAME → has_skill → SKILL`
   - `DESIGNATION → at → ORG`
+  - `PERSON → joined → ORG`
+  - `PERSON → was → DESIGNATION`
 
 ---
 
@@ -66,21 +71,21 @@ resume-parser-with-ml-and-nlp/
 Despite the hybrid approach, the NER output still suffers from **misclassification**:
 - trouble identifying `NAME` as an entity
 
-### 🔴 Examples:
+### Examples:
 - `Vasanthi` → labeled as `SKILLS` instead of `NAME`
 - `Microsoft Office` → labeled as `NAME` instead of `SKILLS`
 - `DETAILS` → labeled as `DESIGNATION`
 - `Bank`, `Melaka` → labeled as `SKILLS`, though they are locations or organizations
 
-### 💡 What's Been Done:
-- Built ML model on labeled training examples
-- Added refined rule patterns for emails, phones, designations, and skills
-- Applied filtering in relationship logic (e.g. ignore misfired `NAME`s)
-
+### What's Been Done:
+- Trained ML model with contextual variety
+- Used logic filters to ignore commonly misclassified terms
+- Evaluated relationships against a curated `ground_truth` JSON
 
 ---
 
-## 📦 Installation
+## Installation
+
 ```bash
 pip install -r requirements.txt
 python -m nltk.downloader punkt stopwords wordnet
@@ -90,33 +95,25 @@ python -m spacy download en_core_web_sm
 ---
 
 ## ✅ Running the Project
+
 ```bash
 # Extract text from resumes
-python src/run_extraction.py
+python src/phase_1_run_extraction.py
 
 # Clean and normalize extracted text
-python src/data_cleaning.py
+python src/phase_2_data_cleaning.py
+
+# Convert training data
+python src/phase_3_data_conversion.py
 
 # Train ML NER model
-python src/entity_recognition.py
+python -m spacy train config.cfg --output output --paths.train train.spacy --paths.dev dev.spacy
 
-# Add rule-based patterns
-python src/entity_ruler.py
-
-# Test entity recognition
-python src/test_model_with_rules.py
-
-# Extract relationships
-python src/relationship_extraction.py
+# Run relationship extraction
+python src/phase_4_relationship_extraction.py
 ```
 
 ---
-
-## 👤 Author
-Okello Crystal
-
-## 🔧 Status
-- ML+Rule model built and working
-- Phase 1–4 complete
-- Entity classification needs refinement
+## Status
+- Phase 1–4 completed and tested
 - Phase 5 (Data Integration) coming next

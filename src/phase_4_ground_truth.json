@@ -1,0 +1,102 @@
+[
+    {
+        "head": "Vasanthi Kasinathan",
+        "relation": "has_skill",
+        "tail": "Malaysia"
+    },
+    {
+        "head": "Vasanthi Kasinathan",
+        "relation": "has_skill",
+        "tail": "English"
+    },
+    {
+        "head": "Vasanthi Kasinathan",
+        "relation": "has_skill",
+        "tail": "FinanceOne"
+    },
+    {
+        "head": "Vasanthi Kasinathan",
+        "relation": "has_skill",
+        "tail": "Quickbooks"
+    },
+    {
+        "head": "Vasanthi Kasinathan",
+        "relation": "has_skill",
+        "tail": "Readypay"
+    },
+    {
+        "head": "Mar 2010",
+        "relation": "has_skill",
+        "tail": "accruals"
+    },
+    {
+        "head": "Mar 2010",
+        "relation": "has_skill",
+        "tail": "forecasts"
+    },
+    {
+        "head": "2000 \u2013",
+        "relation": "has_skill",
+        "tail": "auditors"
+    },
+    {
+        "head": "2000 \u2013",
+        "relation": "has_skill",
+        "tail": "Malaysia"
+    },
+    {
+        "head": "investment size of",
+        "relation": "at",
+        "tail": "Malaysia"
+    },
+    {
+        "head": "investment size of",
+        "relation": "at",
+        "tail": "FinanceOne"
+    },
+    {
+        "head": "of subsidiaries",
+        "relation": "at",
+        "tail": "accruals"
+    },
+    {
+        "head": "of subsidiaries",
+        "relation": "at",
+        "tail": "forecasts"
+    },
+    {
+        "head": "1990 - 1995",
+        "relation": "at",
+        "tail": "auditors"
+    },
+    {
+        "head": "Software Engineer",
+        "relation": "at",
+        "tail": "auditors"
+    },
+    {
+        "head": "Software Engineer",
+        "relation": "at",
+        "tail": "Malaysia"
+    },
+    {
+        "head": "Project Manager",
+        "relation": "at",
+        "tail": "John"
+    },
+    {
+        "head": "John",
+        "relation": "joined",
+        "tail": "Google"
+    },
+    {
+        "head": "He",
+        "relation": "was hired by",
+        "tail": "Microsoft"
+    },
+    {
+        "head": "John",
+        "relation": "was",
+        "tail": "Project Manager"
+    }
+]
