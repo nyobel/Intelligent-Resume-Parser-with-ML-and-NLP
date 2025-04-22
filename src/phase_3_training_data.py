@@ -1,270 +1,219 @@
-"""
-Step 2: Training Data for Custom NER (Phase 3)
-
-This file contains manually annotated training data
-for training a custom spaCy NER model.
-
-Labels: NAME, EMAIL, PHONE, EDUCATION, SKILLS, EXPERIENCE, DESIGNATION, PROJECT
-
-Each entry includes a sentence and the labeled entities it contains.
-"""
-
 TRAINING_DATA = [
-    # 1. EXPERIENCE
-    (
-        "Set up and managed the risk framework, lead customer audits, assisted in new customer proposals to leading banks.",
-        {"entities": [(0, 140, "EXPERIENCE")]}
-    ),
-
-    # 2. NAME, PHONE, EMAIL
-    (
-        "Name: Lee Li Ting | Contact: 9876 1091 | Email: ltlee74@gmail.com",
-        {"entities": [(6, 18, "NAME"), (30, 39, "PHONE"), (48, 66, "EMAIL")]}
-    ),
-
-    # 3. DESIGNATION, EXPERIENCE
-    (
-        "Director, Finance at EDBI Pte Ltd (2015 - Present)",
-        {"entities": [(0, 17, "DESIGNATION"), (21, 46, "EXPERIENCE")]}
-    ),
-
-    # 4. EDUCATION
-    (
-        "Bachelor of Accountancy 1996 - Nanyang Technological University",
-        {"entities": [(0, 66, "EDUCATION")]}
-    ),
-
-    # 5. EDUCATION
-    (
-        "Institute of Chartered Accountants of India - Associate Member",
-        {"entities": [(0, 59, "EDUCATION")]}
-    ),
-
-    # 6. DESIGNATION, EXPERIENCE
-    (
-        "Head of Risk & Compliance at Copal Amba (Jan 2010 – Oct 2010)",
-        {"entities": [(0, 27, "DESIGNATION"), (31, 60, "EXPERIENCE")]}
-    ),
-
-    # 7. SKILLS
-    (
-        "Proficient in Microsoft Office Suite, JDE One World, Quickbooks, IBM S36",
-        {"entities": [(16, 42, "SKILLS"), (44, 58, "SKILLS"), (60, 70, "SKILLS"), (72, 79, "SKILLS")]}
-    ),
-
-    # 8. PROJECT
-    (
-        "Built a real estate close ended fund with assets located in Thailand, Korea, Singapore and Malaysia.",
-        {"entities": [(0, 92, "PROJECT")]}
-    ),
-
-    # 9. DESIGNATION
-    (
-        "Vice President, Xander Group",
-        {"entities": [(0, 14, "DESIGNATION")]}
-    ),
-
-    # 10. EXPERIENCE
-    (
-        "Successfully prepared due diligence documents for fund raising and met prospective investors.",
-        {"entities": [(0, 94, "EXPERIENCE")]}
-    ),
-
-    # 11. SKILLS
-    (
-        "She is proficient in Python, Django, and JavaScript.",
-        {"entities": [(23, 29, "SKILLS"), (31, 37, "SKILLS"), (43, 53, "SKILLS")]}
-    ),
-
-    # 12. NAME, PROJECT, SKILLS
-    (
-        "Kevin Odhiambo developed an e-commerce platform using Flask.",
-        {"entities": [(0, 15, "NAME"), (26, 47, "PROJECT"), (55, 60, "SKILLS")]}
-    ),
-
-    # 13. NAME, DESIGNATION, EXPERIENCE
-    (
-        "Miriam Koech served as a Data Scientist at Microsoft.",
-        {"entities": [(0, 13, "NAME"), (25, 39, "DESIGNATION"), (43, 52, "EXPERIENCE")]}
-    ),
-
-    # 14. NAME
-    (
-        "Her full name is Alice Johnson.",
-        {"entities": [(18, 31, "NAME")]}
-    ),
-
-    # 15. EDUCATION
-    (
-        "She holds a BSc in Computer Science from Kenyatta University.",
-        {"entities": [(14, 46, "EDUCATION")]}
-    ),
-
-    # 16. EDUCATION
-    (
-        "Completed a Master of Science in Artificial Intelligence at UoN in 2021.",
-        {"entities": [(11, 53, "EDUCATION")]}  # 'Master of Science in Artificial Intelligence'
-    ),
-    # 17. NAME
+    # ----- NAME -----
     ("Name: Brian Otieno", {"entities": [(6, 19, "NAME")]}),
-
-    # 18. NAME
-    ("Full name: Sarah Wanjiku", {"entities": [(11, 24, "NAME")]}),
-
-    # 19. EMAIL
-    ("Reach me at: sarah.w@example.com", {"entities": [(13, 34, "EMAIL")]}),
-
-    # 20. PHONE
-    ("Contact: +254712345678", {"entities": [(9, 22, "PHONE")]}),
-
-    # 21. EDUCATION
-    ("Holds a BSc in Information Technology from JKUAT.", {"entities": [(10, 45, "EDUCATION")]}),
-
-    # 22. EDUCATION
-    ("Graduated with a Master’s in Data Science from Strathmore University.", {"entities": [(18, 57, "EDUCATION")]}),
-
-    # 23. SKILLS
-    ("Skilled in HTML, CSS, JavaScript, and Git.", {"entities": [(12, 16, "SKILLS"), (18, 21, "SKILLS"), (23, 33, "SKILLS"), (39, 42, "SKILLS")]}),
-
-    # 24. SKILLS
-    ("Python, Django, Flask, and PostgreSQL", {"entities": [(0, 6, "SKILLS"), (8, 14, "SKILLS"), (16, 21, "SKILLS"), (28, 39, "SKILLS")]}),
-
-    # 25. DESIGNATION
-    ("Worked as a Backend Developer at Cellulant.", {"entities": [(13, 30, "DESIGNATION"), (34, 43, "EXPERIENCE")]}),
-
-    # 26. EXPERIENCE
-    ("Led deployment for cross-border payments platform.", {"entities": [(0, 52, "EXPERIENCE")]}),
-
-    # 27. PROJECT
-    ("Built a hotel booking app using React Native.", {"entities": [(0, 36, "PROJECT"), (43, 55, "SKILLS")]}),
-
-    # 28. PROJECT
-    ("Created a document parser that extracts skills from resumes.", {"entities": [(0, 57, "PROJECT")]}),
-
-    # 29. EXPERIENCE
-    ("Managed a team of 5 engineers across 3 continents.", {"entities": [(0, 49, "EXPERIENCE")]}),
-
-    # 30. NAME, DESIGNATION
-    ("Lucy Mwende is a Senior Data Analyst at Safaricom.", {"entities": [(0, 11, "NAME"),  (18, 37, "DESIGNATION"), (41, 51, "EXPERIENCE")]}),
-
-     # 31. DESIGNATION
-    ("She worked as a Software Engineer at Andela.", {"entities": [(17, 34, "DESIGNATION")] }),
-
-    # 32. SKILLS
-    ("He is proficient in JavaScript and React.", {"entities": [(21, 31, "SKILLS"), (36, 42, "SKILLS")]}),
-
-    # 33. SKILLS
-    ("Her technical stack includes Django, PostgreSQL, and Docker.", {"entities": [(29, 35, "SKILLS"), (37, 48, "SKILLS"), (54, 60, "SKILLS")]}),
-
-    # 34. DESIGNATION
-    ("Appointed as Senior Backend Engineer at Twiga Foods.", {"entities": [(14, 38, "DESIGNATION"), (42, 54, "EXPERIENCE")]}),
-
-    # 35. SKILLS
-    ("Worked with TensorFlow, Pandas, and NumPy on a data science project.", {"entities": [(12, 22, "SKILLS"), (24, 30, "SKILLS"), (36, 41, "SKILLS")]}),
-
-    # 36. NAME
-    ("Name: Prakash Patel", {"entities": [(6, 20, "NAME")]}),
-
-    # 37. NAME
-    ("Full name: Catherine Njoki", {"entities": [(11, 27, "NAME")]}),
-
-    # 38. NAME
+    ("Full name: Catherine Njoki", {"entities": [(11, 26, "NAME")]}),
     ("Candidate: David Njoroge", {"entities": [(11, 26, "NAME")]}),
+    ("Name: Prakash Patel", {"entities": [(6, 20, "NAME")]}),
+    ("Full name: Miriam Achieng", {"entities": [(11, 27, "NAME")]}),
+    ("Name: Alice Johnson", {"entities": [(6, 19, "NAME")]}),
+    ("Name: Kevin Odhiambo", {"entities": [(6, 22, "NAME")]}),
+    ("Full name: James Karanja", {"entities": [(11, 25, "NAME")]}),
+    ("Candidate: Sylvia Wambui", {"entities": [(11, 26, "NAME")]}),
+    ("Name: John Doe", {"entities": [(6, 14, "NAME")]}),
+    ("Name: Grace Muthoni", {"entities": [(6, 21, "NAME")]}),
+    ("Full name: Nancy Kiptoo", {"entities": [(11, 25, "NAME")]}),
+    ("Candidate: Linda Otieno", {"entities": [(11, 26, "NAME")]}),
+    ("Name: Chris Muli", {"entities": [(6, 18, "NAME")]}),
+    ("Name: Serah Wanjiku", {"entities": [(6, 21, "NAME")]}),
+    ("Full name: Julius Kipkoech", {"entities": [(11, 29, "NAME")]}),
+    ("Name: Paul Mwangi", {"entities": [(6, 18, "NAME")]}),
+    ("Candidate: Dennis Langat", {"entities": [(11, 27, "NAME")]}),
+    ("Full name: Mercy Chebet", {"entities": [(11, 26, "NAME")]}),
+    ("Name: Diana Atieno", {"entities": [(6, 20, "NAME")]}),
+    ("Name: Emmanuel Omondi", {"entities": [(6, 23, "NAME")]}),
 
-    # 39. DESIGNATION
-    ("Worked as Marketing Lead at a regional bank.", {"entities": [(11, 25, "DESIGNATION")]}),
-
-    # 40. DESIGNATION
-    ("Appointed as Finance Director for East Africa.", {"entities": [(14, 31, "DESIGNATION")]}),
-
-    # 41. DESIGNATION
-    ("Held the role of Assistant Manager.", {"entities": [(18, 35, "DESIGNATION")]}),
-
-    # 42. SKILLS
-    ("Proficient in SEO, SEM, and Google Analytics.", {"entities": [(16, 19, "SKILLS"), (21, 24, "SKILLS"), (30, 47, "SKILLS")]}),
-
-    # 43. SKILLS
-    ("Technologies used: Docker, Kubernetes, Jenkins.", {"entities": [(20, 26, "SKILLS"), (28, 38, "SKILLS"), (40, 47, "SKILLS")]}),
-
-    # 44. SKILLS
-    ("Familiar with MySQL, MongoDB, and Redis.", {"entities": [(15, 20, "SKILLS"), (22, 29, "SKILLS"), (35, 40, "SKILLS")]}),
-
-    # 45. SKILLS
-    ("Experienced in Tableau, Power BI, and Excel.", {"entities": [(18, 25, "SKILLS"), (27, 35, "SKILLS"), (41, 46, "SKILLS")]}),
-
-    # 46. EDUCATION
-    ("Bachelor of Science in Computer Science from Daystar University.", {"entities": [(0, 53, "EDUCATION")]}),
-
-    # 47. EDUCATION
-    ("Earned a degree in Finance from Strathmore University.", {"entities": [(17, 48, "EDUCATION")]}),
-
-    # 48. EDUCATION
-    ("Graduated with a Diploma in Software Development at Moringa School.", {"entities": [(18, 55, "EDUCATION")]}),
-
-    # 49. PHONE clarification
-    ("Mobile: 0700123456", {"entities": [(8, 18, "PHONE")]}),
-
-    # 50. PHONE clarification
-    ("Phone Number: +254-701-123456", {"entities": [(14, 28, "PHONE")]}),
-
-    # 51. EMAIL
+    # ----- EMAIL -----
     ("Email: brian.o@example.com", {"entities": [(7, 27, "EMAIL")]}),
-
-    # 52. EMAIL
-    ("Reach me at j.kimani@company.org for details.", {"entities": [(12, 33, "EMAIL")]}),
-
-    # 53. EMAIL
-    ("Contact: dorothy.w@firm.co.ke", {"entities": [(9, 30, "EMAIL")]}),
-
-    # 54. NAME
-    ("Candidate Name: Brian Otieno", {"entities": [(16, 29, "NAME")]}),
-
-    # 55. NAME
-    ("Full name: Miriam Achieng", {"entities": [(11, 26, "NAME")]}),
-
-    # 56. EDUCATION
-    ("Bachelor of Commerce in Finance from Nairobi University.", {"entities": [(0, 50, "EDUCATION")]}),
-
-    # 57. EDUCATION
-    ("Diploma in Human Resource Management from Zetech College.", {"entities": [(0, 53, "EDUCATION")]}),
-
-    # 58. DESIGNATION
-    ("Position held: Senior HR Consultant", {"entities": [(16, 36, "DESIGNATION")]}),
-
-    # 59. DESIGNATION
-    ("Role: Procurement Officer at ABC Ltd.", {"entities": [(6, 26, "DESIGNATION")]}),
-
-    # 60. EXPERIENCE
-    ("Handled payroll, tax reconciliation, and statutory reporting.", {"entities": [(0, 61, "EXPERIENCE")]}),
-
-    # 61. EMAIL
-    ("Primary email: alice.njoroge@company.com", {"entities": [(15, 41, "EMAIL")]}),
-
-    # 62. EMAIL
     ("Reach me via: mark.okello@devhub.io", {"entities": [(14, 37, "EMAIL")]}),
-
-    # 63. EMAIL
     ("Contact address: felix.mutiso@cloud.africa", {"entities": [(17, 47, "EMAIL")]}),
-
-    # 64. EMAIL
     ("Work Email - james.kariuki@enterprise.co.ke", {"entities": [(13, 47, "EMAIL")]}),
-
-    # 65. EMAIL
     ("Email ID: ruth.maina@financegroup.org", {"entities": [(10, 42, "EMAIL")]}),
+    ("Primary: elizabeth.kimani@company.org", {"entities": [(9, 40, "EMAIL")]}),
+    ("Send CV to d.njoroge@workmail.com", {"entities": [(12, 35, "EMAIL")]}),
+    ("alt email: m.ombasa@service.io", {"entities": [(11, 33, "EMAIL")]}),
+    ("Reach at: victor.odhiambo@agency.co.ke", {"entities": [(10, 42, "EMAIL")]}),
+    ("Email: sarah.wafula@institution.ac.ke", {"entities": [(7, 42, "EMAIL")]}),
+    ("email: justin.kip@devmail.net", {"entities": [(7, 32, "EMAIL")]}),
+    ("Reach: grace.kariuki@brandcorp.org", {"entities": [(8, 39, "EMAIL")]}),
+    ("My email: a.otieno@greenlogistics.org", {"entities": [(10, 41, "EMAIL")]}),
+    ("Email is: l.mutua@marketforce.africa", {"entities": [(10, 40, "EMAIL")]}),
+    ("Contact: janet.owino@hrworld.com", {"entities": [(9, 35, "EMAIL")]}),
+    ("Send details to: d.mwangi@analytics.co.ke", {"entities": [(18, 45, "EMAIL")]}),
+    ("Work email: c.juma@company.africa", {"entities": [(12, 38, "EMAIL")]}),
+    ("Mail: r.maina@corp.org", {"entities": [(6, 25, "EMAIL")]}),
+    ("Professional email - mercy.k@cloudmail.com", {"entities": [(22, 50, "EMAIL")]}),
+    ("Reach me through brian.njoroge@datahub.com", {"entities": [(19, 49, "EMAIL")]}),
 
-    # 66. EDUCATION
-    ("Bachelor of Science in Software Engineering from Kenyatta University", {"entities": [(0, 61, "EDUCATION")]}),
+    # ----- PHONE -----
+    ("Mobile: 0700123456", {"entities": [(8, 18, "PHONE")]}),
+    ("Phone Number: +254-701-123456", {"entities": [(14, 28, "PHONE")]}),
+    ("Contact: +254712345678", {"entities": [(9, 22, "PHONE")]}),
+    ("Reach me at 0712345678 or via email", {"entities": [(12, 22, "PHONE")]}),
+    ("Call me at +254 721 555555 for clarification", {"entities": [(11, 25, "PHONE")]}),
+    ("Phone: 0734567890", {"entities": [(7, 17, "PHONE")]}),
+    ("Direct line: 0111222333", {"entities": [(13, 23, "PHONE")]}),
+    ("+254 722 334455 is my work number", {"entities": [(0, 14, "PHONE")]}),
+    ("Contact: 0799123456", {"entities": [(9, 19, "PHONE")]}),
+    ("Alt phone: +254715667788", {"entities": [(11, 25, "PHONE")]}),
+    ("Phone line: 0722334455", {"entities": [(12, 22, "PHONE")]}),
+    ("Main line: 0111222333", {"entities": [(11, 21, "PHONE")]}),
+    ("Cell: +254 733 444 555", {"entities": [(6, 21, "PHONE")]}),
+    ("You can reach me via 0712345678", {"entities": [(22, 32, "PHONE")]}),
+    ("Call on 0700123012 for inquiries", {"entities": [(8, 18, "PHONE")]}),
+    ("Phone contact is 0722123456", {"entities": [(18, 28, "PHONE")]}),
+    ("Reach at: 0733998877", {"entities": [(10, 20, "PHONE")]}),
+    ("Emergency: +254701234567", {"entities": [(11, 25, "PHONE")]}),
+    ("Cellphone: 0722567890", {"entities": [(11, 21, "PHONE")]}),
+    ("Phone: +254 799 123456", {"entities": [(7, 23, "PHONE")]}),
 
-    # 67. EDUCATION
-    ("Earned a BA in Economics at University of Nairobi", {"entities": [(10, 47, "EDUCATION")]}),
+    # ----- EDUCATION -----
+    ("Bachelor of Science in Information Technology from Jomo Kenyatta University of Agriculture and Technology.", {"entities": [(0, 94, "EDUCATION")]}),
+    ("Graduated with a Diploma in Human Resource Management from Zetech College.", {"entities": [(18, 75, "EDUCATION")]}),
+    ("Earned a Certificate in Data Analytics from Moringa School.", {"entities": [(10, 60, "EDUCATION")]}),
+    ("Master of Science in Artificial Intelligence at UoN.", {"entities": [(0, 47, "EDUCATION")]}),
+    ("BSc in Computer Science from University of Nairobi.", {"entities": [(0, 48, "EDUCATION")]}),
+    ("Diploma in Business Information Technology at Strathmore University.", {"entities": [(0, 66, "EDUCATION")]}),
+    ("Completed a BSc in Computer Engineering from Kenyatta University.", {"entities": [(11, 62, "EDUCATION")]}),
+    ("Holds a Master’s in Financial Engineering from USIU.", {"entities": [(9, 53, "EDUCATION")]}),
+    ("Graduated with a Certificate in Full Stack Web Development from Moringa School.", {"entities": [(18, 81, "EDUCATION")]}),
+    ("Earned a BA in Economics from University of Nairobi.", {"entities": [(10, 52, "EDUCATION")]}),
+    ("Diploma in Supply Chain Management from Kenya Institute of Management.", {"entities": [(0, 70, "EDUCATION")]}),
+    ("Completed a Certificate in Data Science at Africa Data School.", {"entities": [(11, 63, "EDUCATION")]}),
+    ("Bachelor of Commerce in Finance from Nairobi University.", {"entities": [(0, 53, "EDUCATION")]}),
+    ("Graduated with a B.Sc. in Actuarial Science from University of Eldoret.", {"entities": [(18, 72, "EDUCATION")]}),
+    ("Received a Master’s in Public Policy from Strathmore University.", {"entities": [(10, 61, "EDUCATION")]}),
+    ("BSc in Information Systems at USIU-Africa.", {"entities": [(0, 39, "EDUCATION")]}),
+    ("Bachelor’s in Statistics from Kenyatta University.", {"entities": [(0, 48, "EDUCATION")]}),
+    ("Completed Diploma in Software Engineering at Moringa School.", {"entities": [(10, 61, "EDUCATION")]}),
+    ("Attended Nairobi Technical Institute, Diploma in Computer Studies.", {"entities": [(9, 66, "EDUCATION")]}),
+    ("Completed a BSc in Telecommunications from JKUAT.", {"entities": [(11, 58, "EDUCATION")]}),
 
-    # 68. EDUCATION
-    ("Diploma in Supply Chain Management from Kenya Institute of Management", {"entities": [(0, 61, "EDUCATION")]}),
+    # ----- SKILLS -----
+    ("Skilled in Python, Django, React and SQL.", {"entities": [(12, 18, "SKILLS"), (20, 26, "SKILLS"), (28, 34, "SKILLS"), (39, 42, "SKILLS")]}),
+    ("Technologies: Docker, Kubernetes, Jenkins.", {"entities": [(13, 19, "SKILLS"), (21, 31, "SKILLS"), (33, 40, "SKILLS")]}),
+    ("Proficient in Tableau, Power BI and Excel.", {"entities": [(16, 23, "SKILLS"), (25, 33, "SKILLS"), (38, 43, "SKILLS")]}),
+    ("Experienced in SEO, SEM, and Google Analytics.", {"entities": [(16, 19, "SKILLS"), (21, 24, "SKILLS"), (30, 47, "SKILLS")]}),
+    ("Worked with TensorFlow, Pandas, NumPy.", {"entities": [(12, 22, "SKILLS"), (24, 30, "SKILLS"), (32, 37, "SKILLS")]}),
+    ("Knowledge of HTML, CSS, JavaScript.", {"entities": [(14, 18, "SKILLS"), (20, 23, "SKILLS"), (25, 35, "SKILLS")]}),
+    ("Skills: C++, Java, Python.", {"entities": [(8, 11, "SKILLS"), (13, 17, "SKILLS"), (19, 25, "SKILLS")]}),
+    ("Experience with Flask, FastAPI, PostgreSQL.", {"entities": [(18, 23, "SKILLS"), (25, 32, "SKILLS"), (34, 45, "SKILLS")]}),
+    ("Comfortable using Git, GitHub, Bitbucket.", {"entities": [(20, 23, "SKILLS"), (25, 31, "SKILLS"), (33, 42, "SKILLS")]}),
+    ("Used Ansible, Jenkins and Kubernetes in deployment.", {"entities": [(5, 12, "SKILLS"), (14, 21, "SKILLS"), (26, 36, "SKILLS")]}),
+    ("Hands-on with VS Code, PyCharm and IntelliJ.", {"entities": [(14, 21, "SKILLS"), (23, 30, "SKILLS"), (35, 43, "SKILLS")]}),
+    ("Technical expertise in REST APIs and JSON.", {"entities": [(25, 34, "SKILLS"), (39, 43, "SKILLS")]}),
+    ("Working knowledge of Excel, PowerPoint, and Outlook.", {"entities": [(22, 27, "SKILLS"), (29, 39, "SKILLS"), (45, 52, "SKILLS")]}),
+    ("Comfortable with Linux, Bash, and Terminal commands.", {"entities": [(17, 22, "SKILLS"), (24, 28, "SKILLS")]}),
+    ("Familiar with Tableau, Power BI and DAX.", {"entities": [(14, 21, "SKILLS"), (23, 31, "SKILLS"), (36, 39, "SKILLS")]}),
+    ("Hands-on with Apache Spark and Hadoop.", {"entities": [(14, 26, "SKILLS"), (31, 37, "SKILLS")]}),
+    ("Proficient in MySQL, SQLite, MongoDB.", {"entities": [(16, 21, "SKILLS"), (23, 30, "SKILLS"), (32, 39, "SKILLS")]}),
+    ("Comfortable with AWS, Azure, and GCP.", {"entities": [(18, 21, "SKILLS"), (23, 28, "SKILLS"), (34, 37, "SKILLS")]}),
+    ("Experienced in React, Vue and Angular.", {"entities": [(16, 21, "SKILLS"), (23, 26, "SKILLS"), (31, 38, "SKILLS")]}),
+    ("Used Google Sheets and MS Excel for analysis.", {"entities": [(5, 18, "SKILLS"), (23, 31, "SKILLS")]}),
 
-    # 69. EDUCATION
-    ("Master’s in Artificial Intelligence from Strathmore University", {"entities": [(0, 54, "EDUCATION")]}),
+    # ----- DESIGNATION -----
+    ("Software Engineer at Cellulant.", {"entities": [(0, 18, "DESIGNATION")]}),
+    ("Backend Developer at Andela.", {"entities": [(0, 18, "DESIGNATION")]}),
+    ("Senior Data Analyst at Safaricom.", {"entities": [(0, 20, "DESIGNATION")]}),
+    ("Procurement Officer at ABC Ltd.", {"entities": [(0, 20, "DESIGNATION")]}),
+    ("Senior HR Consultant at HR Firm.", {"entities": [(0, 20, "DESIGNATION")]}),
+    ("Project Manager at Logistics Ltd.", {"entities": [(0, 15, "DESIGNATION")]}),
+    ("IT Support Specialist at TechCorp.", {"entities": [(0, 22, "DESIGNATION")]}),
+    ("Finance Director at BankCo.", {"entities": [(0, 16, "DESIGNATION")]}),
+    ("Marketing Lead at Media Agency.", {"entities": [(0, 14, "DESIGNATION")]}),
+    ("Head of Operations at GlobalMart.", {"entities": [(0, 19, "DESIGNATION")]}),
+    ("Lead Software Developer at CodeWorks.", {"entities": [(0, 23, "DESIGNATION")]}),
+    ("HR Manager at TalentHub.", {"entities": [(0, 10, "DESIGNATION")]}),
+    ("Business Analyst at InnovateX.", {"entities": [(0, 16, "DESIGNATION")]}),
+    ("Technical Writer at DocsPlus.", {"entities": [(0, 15, "DESIGNATION")]}),
+    ("DevOps Engineer at CloudNet.", {"entities": [(0, 15, "DESIGNATION")]}),
+    ("Operations Manager at DeliveryNow.", {"entities": [(0, 18, "DESIGNATION")]}),
+    ("Design Lead at CreativeHouse.", {"entities": [(0, 11, "DESIGNATION")]}),
+    ("Customer Success Manager at SaaSInc.", {"entities": [(0, 24, "DESIGNATION")]}),
+    ("Legal Officer at LawGroup.", {"entities": [(0, 13, "DESIGNATION")]}),
+    ("Account Manager at MarketReach.", {"entities": [(0, 15, "DESIGNATION")]}),
 
-    # 70. EDUCATION
-    ("Completed a Certificate in Data Analytics from Moringa School", {"entities": [(11, 58, "EDUCATION")]})
+    # ----- EXPERIENCE -----
+    ("Managed a team of 5 engineers across 3 regions.", {"entities": [(0, 47, "EXPERIENCE")]}),
+    ("Led deployment of mobile app across East Africa.", {"entities": [(0, 45, "EXPERIENCE")]}),
+    ("Directed fundraising efforts and pitched to VCs.", {"entities": [(0, 45, "EXPERIENCE")]}),
+    ("Prepared financial forecasts and investor reports.", {"entities": [(0, 48, "EXPERIENCE")]}),
+    ("Improved onboarding flow by 30% for new users.", {"entities": [(0, 44, "EXPERIENCE")]}),
+    ("Collaborated with design and dev team on UI/UX.", {"entities": [(0, 48, "EXPERIENCE")]}),
+    ("Created scripts for data ingestion and ETL.", {"entities": [(0, 42, "EXPERIENCE")]}),
+    ("Reduced server costs by 20% by optimizing APIs.", {"entities": [(0, 47, "EXPERIENCE")]}),
+    ("Facilitated training sessions for junior analysts.", {"entities": [(0, 48, "EXPERIENCE")]}),
+    ("Oversaw compliance reporting for 5 countries.", {"entities": [(0, 45, "EXPERIENCE")]}),
+    ("Handled payroll, compliance and tax reporting.", {"entities": [(0, 47, "EXPERIENCE")]}),
+    ("Set up CI/CD pipelines using Jenkins and GitHub Actions.", {"entities": [(0, 50, "EXPERIENCE")]}),
+    ("Built chatbot integration with Slack for HR team.", {"entities": [(0, 47, "EXPERIENCE")]}),
+    ("Analyzed customer retention metrics and churn rate.", {"entities": [(0, 49, "EXPERIENCE")]}),
+    ("Integrated payment gateways for e-commerce app.", {"entities": [(0, 47, "EXPERIENCE")]}),
+    ("Launched referral program and tracked conversion.", {"entities": [(0, 47, "EXPERIENCE")]}),
+    ("Wrote technical documentation for APIs and endpoints.", {"entities": [(0, 50, "EXPERIENCE")]}),
+    ("Evaluated vendor tools for internal data teams.", {"entities": [(0, 45, "EXPERIENCE")]}),
+    ("Researched competitive products and market share.", {"entities": [(0, 46, "EXPERIENCE")]}),
+    ("Implemented log monitoring with Grafana and Loki.", {"entities": [(0, 47, "EXPERIENCE")]}),
+
+    # ----- PROJECT -----
+    ("Built a real estate listing platform for Kenya.", {"entities": [(0, 41, "PROJECT")]}),
+    ("Developed chatbot to assist students in course selection.", {"entities": [(0, 53, "PROJECT")]}),
+    ("Created resume parser using spaCy and Streamlit.", {"entities": [(0, 45, "PROJECT")]}),
+    ("Designed a budget tracking app with data visualization.", {"entities": [(0, 52, "PROJECT")]}),
+    ("Engineered invoice generator for small businesses.", {"entities": [(0, 47, "PROJECT")]}),
+    ("Built a secure login/auth system with JWT tokens.", {"entities": [(0, 48, "PROJECT")]}),
+    ("Led development of internship portal for university.", {"entities": [(0, 52, "PROJECT")]}),
+    ("Built HR analytics dashboard using Power BI.", {"entities": [(0, 42, "PROJECT")]}),
+    ("Created sales lead scoring engine with XGBoost.", {"entities": [(0, 45, "PROJECT")]}),
+    ("Redesigned NGO donation tracker for field staff.", {"entities": [(0, 46, "PROJECT")]}),
+    ("Developed MPESA API integration for payments.", {"entities": [(0, 42, "PROJECT")]}),
+    ("Built COVID-19 trends visualizer for public use.", {"entities": [(0, 45, "PROJECT")]}),
+    ("Launched startup pitch tracker for accelerators.", {"entities": [(0, 48, "PROJECT")]}),
+    ("Designed a document management system for legal teams.", {"entities": [(0, 55, "PROJECT")]}),
+    ("Created career portal for job seekers.", {"entities": [(0, 37, "PROJECT")]}),
+    ("Built a supply chain heatmap for FMCG sector.", {"entities": [(0, 43, "PROJECT")]}),
+    ("Constructed learning portal for math revision.", {"entities": [(0, 44, "PROJECT")]}),
+    ("Automated customer support workflows with Zapier.", {"entities": [(0, 48, "PROJECT")]}),
+    ("Built personal finance planner using Streamlit.", {"entities": [(0, 44, "PROJECT")]}),
+    ("Engineered facial recognition login with OpenCV.", {"entities": [(0, 47, "PROJECT")]}),
+
+    # ----- REFINE: CONTEXTUAL EXAMPLES FOR GENERALIZATION -----
+    # SKILLS - natural sentences, with contrast
+    ("She is highly skilled in Python and Django.", {"entities": [(26, 32, "SKILLS"), (37, 43, "SKILLS")]}),
+    ("He works with JavaScript, React, and Redux.", {"entities": [(14, 24, "SKILLS"), (26, 31, "SKILLS"), (37, 43, "SKILLS")]}),
+    ("Tools I often use: Git, Docker.", {"entities": [(20, 23, "SKILLS"), (25, 31, "SKILLS")]}),
+    ("Fluent in Excel, notepad, and other tools.", {"entities": [(10, 15, "SKILLS")]}),  # notepad = noise
+    ("She mentioned 'designed' but not any tools.", {"entities": []}),  # verb "designed" used in a different context
+    (".", {"entities": []}),
+    (",", {"entities": []}),
+    ("React, Python.", {"entities": [(0, 5, "SKILLS"), (7, 13, "SKILLS")]}),
+    ("She's proficient.", {"entities": []}),
+
+    # EDUCATION - full and partial, with negatives
+    ("Graduated with a Bachelor of Science in Data Science from KU.", {"entities": [(18, 65, "EDUCATION")]}),
+    ("I studied computer repair.", {"entities": []}),
+    ("Currently pursuing MSc in Cybersecurity at USIU.", {"entities": [(20, 57, "EDUCATION")]}),
+    ("Took a short course in marketing online.", {"entities": []}),  # informal
+
+    # DESIGNATION - various forms
+    ("Employed as a Senior Backend Developer.", {"entities": [(14, 38, "DESIGNATION")]}),
+    ("Job Title: Software Developer Intern", {"entities": [(11, 36, "DESIGNATION")]}),
+    ("Software Engineer", {"entities": [(0, 17, "DESIGNATION")]}),
+
+    # PROJECT - variable structures
+    ("Built a chatbot that helps users find information.", {"entities": [(0, 48, "PROJECT")]}),
+    ("Developed payroll automation system for HR.", {"entities": [(0, 45, "PROJECT")]}),
+    ("Worked on analytics dashboard with Power BI.", {"entities": [(0, 44, "PROJECT")]}),
+    ("He built a resume parser using spaCy and Streamlit.", {"entities": [(3, 52, "PROJECT")]}),
+    ("Developed a project called ResumeWizard that extracts CV info.", {"entities": [(0, 60, "PROJECT")]}),
+
+
+    # EXPERIENCE - varied phrasing
+    ("Managed cross-functional teams for delivery.", {"entities": [(0, 43, "EXPERIENCE")]}),
+    ("Led strategy for Q4 go-to-market execution.", {"entities": [(0, 45, "EXPERIENCE")]}),
+
+    # PHONE - diverse formats
+    ("Reach me via 0700-123-456 or email.", {"entities": [(13, 25, "PHONE")]}),
+    ("Contact: +254 (0) 712 345678", {"entities": [(9, 28, "PHONE")]}),
+    ("Phone: 0722.334.455", {"entities": [(7, 19, "PHONE")]}),
+    ("My contact is 0734567", {"entities": []}),  # too short — negative
 ]
-
