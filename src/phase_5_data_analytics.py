@@ -52,5 +52,8 @@ agg_df = (raw_df.groupby(
     .reset_index()
 )
 
+# Export to CSV
+agg_df.to_csv("clean_resume_data.csv", index=False)
+
 # Show cleaned dataset
 print(agg_df.head())

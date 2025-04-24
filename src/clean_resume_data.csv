@@ -1,0 +1,2 @@
+candidate_id,full_name,current_title,email,phone,degree,institution,experience,skill_name
+1,Jane Doe,Data Scientist,jane.doe@example.com,+254712345678,BSc in Computer Science,University of Nairobi,Built NLP models and deployed APIs for resume parsing.,"['SQL', 'Python', 'NLP']"
