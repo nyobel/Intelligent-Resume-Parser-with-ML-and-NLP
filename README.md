@@ -1,119 +1,78 @@
-# Resume Parser with ML and NLP
+# 📌 Resume Parser with ML & NLP
 
-## Project Overview
-This project is a resume parsing system that extracts structured information from resumes using a combination of **Machine Learning** and **Rule-Based Named Entity Recognition (NER)**. The goal is to transform unstructured resumes in PDF, DOCX, and image formats into structured data for downstream applications like applicant screening, skill matching, and job recommendation systems.
-
----
-
-##  Project Structure
-
-```
-INTELLIGENT RESUME PARSER WITH ML AND NLP/
-│
-├── archives/                          # Archived experiments and backup models
-├── data/                              # Source resume files
-├── extracted_texts/                   # Cleaned text files extracted from resumes
-├── output/                            # Trained model and artifacts
-│
-├── src/                               # Project logic (all Python scripts)
-│   ├── __pycache__/
-│   ├── entity_patterns.jsonl          # Optional pattern file (unused in training)
-│   ├── extract_docx.py                # DOCX extractor
-│   ├── extract_image.py               # OCR for image resumes
-│   ├── extract_pdf.py                 # PDF extractor
-│   ├── labels.py                      # Custom entity label definitions
-│   ├── phase_1_run_extraction.py      # Extracts raw text from resumes
-│   ├── phase_2_data_cleaning.py       # Text normalization and cleanup
-│   ├── phase_3_data_conversion.py     # Converts training data to spaCy DocBin
-│   ├── phase_3_training_data.py       # Annotated training examples
-│   ├── phase_4_ground_truth.json      # Ground truth triples for evaluation
-│   ├── phase_4_relationship_extraction.py # Extracts rule-based and dependency-based relations
-│   ├── test_model.py                  # Manual testing script for NER outputs
-│
-├── config.cfg                         # spaCy config for model training
-├── dev.spacy                          # Dev dataset in binary format
-├── train.spacy                        # Training dataset in binary format
-├── requirements.txt                   # Required Python libraries
-├── .gitignore                         # Files/folders to ignore in git
-├── README.md                          # You are here
-```
+## 🎯 Project Objective
+This project is a modular resume parsing system that:
+- Extracts structured data from raw resumes (`PDF`, `DOCX`, `Images`)
+- Uses **custom-trained spaCy NER**
+- Stores results in SQL Server
+- Prepares cleaned data for downstream **machine learning applications**
 
 ---
 
-## Phases
+## 🧱 Phased Approach & Techniques
 
-### Phase 1: Data Extraction ✅
-- Automatically identifies file type (PDF, DOCX, PNG/JPG)
-- Extracts raw text using PyMuPDF, python-docx, or Tesseract OCR
-- Saves output to `/extracted_texts/`
+### Phase 1: Data Extraction
+- Tools: `python-docx`, `PyMuPDF`, `pytesseract`
+- Extracted text from `.docx`, `.pdf`, and image-based resumes.
 
-### Phase 2: Data Cleaning ✅
-- Removes noise, lowercases, and lemmatizes
-- Standardizes formatting for emails, phones, and spacing
+### Phase 2: Data Cleaning
+- Used regular expressions to normalize whitespace, remove headers/footers, and correct formatting issues.
 
-### Phase 3: Entity Recognition (NER) ✅
-- Trained a custom NER model using **spaCy** and labeled training data
-- No `EntityRuler` was used
-- Labels include: `NAME`, `EMAIL`, `PHONE`, `EDUCATION`, `DESIGNATION`, `SKILLS`, `EXPERIENCE`, `PROJECT`
+### Phase 3: Annotation & Conversion
+- Manually labeled training data with entity spans.
+- Converted annotations into `.spacy` format using `DocBin`.
 
-### Phase 4: Relationship Extraction ✅
-- Uses both rule-based and dependency-based methods
-- Extracts triplets such as:
-  - `NAME → has_skill → SKILL`
-  - `DESIGNATION → at → ORG`
-  - `PERSON → joined → ORG`
-  - `PERSON → was → DESIGNATION`
+### Phase 4: Named Entity Recognition (NER)
+- Trained a **custom spaCy model** to recognize:
+  - `PERSON`, `EMAIL`, `PHONE`, `EDUCATION`, `INSTITUTION`, `SKILLS`, `PROJECT`, `DESIGNATION`
+- Incorporated fallback logic for email/phone/name via regex or keyword matching.
 
----
+### Phase 5: Data Integration with SQL Server
+- Designed and created a normalized SQL schema:
+  - Tables: `candidates`, `skills`, `education`, `contact_info`, `experiences`
+- Used `pyodbc` to insert resume data with **duplicate checking and error handling**
+- Logged success/failure of each file processed
 
-## ⚠️ Current Challenge: Entity Label Inconsistencies
-
-Despite the hybrid approach, the NER output still suffers from **misclassification**:
-- trouble identifying `NAME` as an entity
-
-### Examples:
-- `Vasanthi` → labeled as `SKILLS` instead of `NAME`
-- `Microsoft Office` → labeled as `NAME` instead of `SKILLS`
-- `DETAILS` → labeled as `DESIGNATION`
-- `Bank`, `Melaka` → labeled as `SKILLS`, though they are locations or organizations
-
-### What's Been Done:
-- Trained ML model with contextual variety
-- Used logic filters to ignore commonly misclassified terms
-- Evaluated relationships against a curated `ground_truth` JSON
+### Phase 6: Data Modeling & ML
+- Queried structured data using `pandas.read_sql()`
+- Aggregated and encoded skills using `MultiLabelBinarizer`
+- Performed clustering with `KMeans`
+- Trained a **Random Forest classifier** to predict job titles
+- Implemented **similarity search** using cosine similarity on encoded skill vectors
 
 ---
 
-## Installation
+## 🧪 Evaluation Criteria
 
-```bash
-pip install -r requirements.txt
-python -m nltk.downloader punkt stopwords wordnet
-python -m spacy download en_core_web_sm
-```
+| Metric         | Evaluation                                                                 |
+|----------------|----------------------------------------------------------------------------|
+| NER Quality     | Evaluated on test text + entity-level fallback logic                     |
+| SQL Schema      | Fully normalized; no redundancy; truncation-proof                        |
+| Data Insertion  | Robust, deduplicated, log-tracked                                         |
+| ML Readiness    | Clean, one-row-per-candidate format with binary skill features           |
+| Export Utility  | CSV outputs (`clean_resume_data.csv`, `encoded_resume_data.csv`) created |
+
+---
+
+## ✅ Project Outcomes
+- A complete NLP-to-SQL-to-ML pipeline
+- Accurate entity extraction and SQL data storage
+- Batch processing of resumes with duplicate avoidance
+- Clean machine learning input dataset
+- Top-matching resume suggestions via cosine similarity
 
 ---
 
-## ✅ Running the Project
-
-```bash
-# Extract text from resumes
-python src/phase_1_run_extraction.py
-
-# Clean and normalize extracted text
-python src/phase_2_data_cleaning.py
-
-# Convert training data
-python src/phase_3_data_conversion.py
-
-# Train ML NER model
-python -m spacy train config.cfg --output output --paths.train train.spacy --paths.dev dev.spacy
-
-# Run relationship extraction
-python src/phase_4_relationship_extraction.py
-```
 
 ---
-## Status
-- Phase 1–4 completed and tested
-- Phase 5 (Data Integration) coming next
+
+## 🧭 Next Steps
+- Add job-role matching by skill overlap
+- Expand annotated data for better NER generalization
+- Build an interactive frontend (Streamlit / Power BI dashboard)
+
+---
+
+
+
+
