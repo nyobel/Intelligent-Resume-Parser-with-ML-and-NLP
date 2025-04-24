@@ -1,0 +1,41 @@
+2025-04-24 00:53:24,185 - ERROR - Database error: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]The client cannot connect to the server because the requested instance was not available. Use SQL Server Configuration Manager to make sure the SQL Server instance is configured correctly.  (0) (SQLDriverConnect)')
+2025-04-24 01:06:45,058 - ERROR - Database error: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]The client cannot connect to the server because the requested instance was not available. Use SQL Server Configuration Manager to make sure the SQL Server instance is configured correctly.  (0) (SQLDriverConnect)')
+2025-04-24 01:08:55,030 - ERROR - Database error: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]The client cannot connect to the server because the requested instance was not available. Use SQL Server Configuration Manager to make sure the SQL Server instance is configured correctly.  (0) (SQLDriverConnect)')
+2025-04-24 01:10:43,622 - ERROR - Database error: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]The client cannot connect to the server because the requested instance was not available. Use SQL Server Configuration Manager to make sure the SQL Server instance is configured correctly.  (0) (SQLDriverConnect)')
+2025-04-24 15:22:38,399 - ERROR - Database error: ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'candidates'. (208) (SQLExecDirectW); [42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+2025-04-24 15:27:48,812 - ERROR - Database error: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'sa\'. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "ResumeParserDB" requested by the login. The login failed. (4060); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Login failed for user \'sa\'. (18456); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open database "ResumeParserDB" requested by the login. The login failed. (4060)')
+2025-04-24 16:04:40,069 - INFO - \u2705 Candidate 'Mercy Chebet' inserted successfully.
+2025-04-24 16:19:37,612 - ERROR - Database error: ('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]String or binary data would be truncated in table 'ResumeParseDB.dbo.education', column 'degree'. Truncated value: 'Bachelors of Commerce (Honors) - First Division \n \n \n \n \n \n    May 2002 \n \nD.P.S.   R.K. Puram \n \n \n'. (2628) (SQLExecDirectW); [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2025-04-24 16:19:37,674 - ERROR - Database error: ('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]String or binary data would be truncated in table 'ResumeParseDB.dbo.contact_info', column 'phone'. Truncated value: 'nso computer Soience, Universi'. (2628) (SQLExecDirectW); [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2025-04-24 16:19:37,717 - ERROR - Database error: ('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]String or binary data would be truncated in table 'ResumeParseDB.dbo.contact_info', column 'phone'. Truncated value: 'BSc Computer Science, Universi'. (2628) (SQLExecDirectW); [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2025-04-24 16:19:37,745 - ERROR - Database error: ('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]String or binary data would be truncated in table 'ResumeParseDB.dbo.contact_info', column 'phone'. Truncated value: 'BSc Computer Science, Universi'. (2628) (SQLExecDirectW); [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2025-04-24 16:19:37,786 - INFO - \u2705 Candidate 'None' inserted successfully.
+2025-04-24 16:19:37,834 - INFO - \u2705 Candidate 'Brian Otieno
+Email' inserted successfully.
+2025-04-24 16:19:37,864 - INFO - \u2705 Candidate 'Brian Otieno
+Email' inserted successfully.
+2025-04-24 16:19:37,913 - INFO - \u2705 Candidate 'None' inserted successfully.
+2025-04-24 16:19:37,952 - INFO - \u2705 Candidate 'Catherine Mwangi
+Email' inserted successfully.
+2025-04-24 16:19:37,984 - INFO - \u2705 Candidate 'Catherine Mwangi
+Email' inserted successfully.
+2025-04-24 16:19:38,255 - ERROR - Database error: ('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]String or binary data would be truncated in table 'ResumeParseDB.dbo.contact_info', column 'phone'. Truncated value: 'THB 2.3 bn\nCalculate capital c'. (2628) (SQLExecDirectW); [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2025-04-24 16:19:38,523 - ERROR - Database error: ('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]String or binary data would be truncated in table 'ResumeParseDB.dbo.contact_info', column 'phone'. Truncated value: 'Attainment of tax incentives f'. (2628) (SQLExecDirectW); [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2025-04-24 16:21:57,724 - INFO - \u2705 Candidate 'None' inserted successfully.
+2025-04-24 16:21:57,761 - INFO - \u2705 Candidate 'Alice Johnson' inserted successfully.
+2025-04-24 16:21:57,794 - INFO - \u2705 Candidate 'Alice Johnson
+Email' inserted successfully.
+2025-04-24 16:21:57,828 - INFO - \u2705 Candidate 'Alice Johnson
+Email' inserted successfully.
+2025-04-24 16:21:57,861 - INFO - \u2705 Candidate 'None' inserted successfully.
+2025-04-24 16:21:57,894 - INFO - \u2705 Candidate 'Brian Otieno
+Email' inserted successfully.
+2025-04-24 16:21:57,918 - INFO - \u2705 Candidate 'Brian Otieno
+Email' inserted successfully.
+2025-04-24 16:21:57,944 - INFO - \u2705 Candidate 'None' inserted successfully.
+2025-04-24 16:21:57,983 - INFO - \u2705 Candidate 'Catherine Mwangi
+Email' inserted successfully.
+2025-04-24 16:21:58,017 - INFO - \u2705 Candidate 'Catherine Mwangi
+Email' inserted successfully.
+2025-04-24 16:21:58,344 - INFO - \u2705 Candidate 'None' inserted successfully.
+2025-04-24 16:21:58,556 - INFO - \u2705 Candidate 'None' inserted successfully.
